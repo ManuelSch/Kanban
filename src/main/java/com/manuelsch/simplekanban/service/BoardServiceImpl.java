@@ -5,6 +5,9 @@ import com.manuelsch.simplekanban.models.Board;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class BoardServiceImpl implements BoardService {
 
@@ -16,7 +19,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public Board createBoard(Board newBoard) throws AssertionError {
+    public Board createBoard(Board newBoard) {
         assert newBoard.getTitle() != null : "Title is null";
         assert newBoard.getTitle().length() < 255 : "Title must be shorter than 255 characters";
 
@@ -24,13 +27,13 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public Board getBoardById(String id) {
-        return null;
+    public Optional<Board> getBoardById(String id) {
+        return boardRepository.findById(id);
     }
 
     @Override
-    public Board getAllBoards() {
-        return null;
+    public List<Board> getAllBoards() {
+        return boardRepository.findAll();
     }
 
 

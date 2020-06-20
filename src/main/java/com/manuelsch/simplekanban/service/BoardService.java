@@ -2,6 +2,9 @@ package com.manuelsch.simplekanban.service;
 
 import com.manuelsch.simplekanban.models.Board;
 
+import java.util.List;
+import java.util.Optional;
+
 public interface BoardService {
 
     /**
@@ -9,19 +12,19 @@ public interface BoardService {
      * @param newBoard
      * @return
      */
-    public Board createBoard(Board newBoard);
+    public Board createBoard(Board newBoard) throws AssertionError;
 
     /**
      * Returns the Kanban board with the given ID
      * @param id
      * @return
      */
-    public Board getBoardById(String id);
+    public Optional<Board> getBoardById(String id);
 
     /**
      * Returns all Kanban boards stored in the database
      * @return
      */
-    public Board getAllBoards();
+    public List<Board> getAllBoards();
 
 }
