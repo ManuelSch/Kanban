@@ -1,5 +1,8 @@
 package com.manuelsch.simplekanban.models;
 
+/**
+ * A Kanban task/item
+ */
 public class Task {
 
     private String title;
