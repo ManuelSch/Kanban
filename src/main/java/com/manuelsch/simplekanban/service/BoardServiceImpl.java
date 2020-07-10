@@ -1,12 +1,13 @@
 package com.manuelsch.simplekanban.service;
 
-import com.manuelsch.simplekanban.repositories.BoardRepository;
+import com.manuelsch.simplekanban.DTOs.exceptionHandling.RecordNotFoundException;
 import com.manuelsch.simplekanban.models.Board;
+import com.manuelsch.simplekanban.repositories.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -19,9 +20,10 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public Board createBoard(Board newBoard) {
-        assert newBoard.getTitle() != null : "Title is null";
-        assert newBoard.getTitle().length() < 255 : "Title must be shorter than 255 characters";
+    @Transactional
+    public Board createBoard(String title) {
+        Board newBoard = new Board();
+        newBoard.setTitle(title);
 
         return boardRepository.save(newBoard);
     }

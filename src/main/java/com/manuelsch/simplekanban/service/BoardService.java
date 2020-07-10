@@ -1,30 +1,37 @@
 package com.manuelsch.simplekanban.service;
 
+import com.manuelsch.simplekanban.DTOs.exceptionHandling.RecordNotFoundException;
 import com.manuelsch.simplekanban.models.Board;
 
 import java.util.List;
-import java.util.Optional;
 
+/**
+ * Business logic for dealing with Kanban boards
+ */
 public interface BoardService {
 
     /**
      * Creates a new Kanban board
-     * @param newBoard
+     *
+     * @param title
      * @return
+     * @throws AssertionError
      */
-    public Board createBoard(Board newBoard) throws AssertionError;
+    Board createBoard(String title) throws RecordNotFoundException;
 
     /**
      * Returns the Kanban board with the given ID
+     *
      * @param id
      * @return
      */
-    public Optional<Board> getBoardById(String id);
+    Board getBoardById(String id) throws RecordNotFoundException;
 
     /**
      * Returns all Kanban boards stored in the database
+     *
      * @return
      */
-    public List<Board> getAllBoards();
+    List<Board> getAllBoards();
 
 }
