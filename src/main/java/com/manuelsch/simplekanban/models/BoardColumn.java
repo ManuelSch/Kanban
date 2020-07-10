@@ -25,9 +25,23 @@ public class BoardColumn {
     @Column
     private Integer position;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "board_id")
-    private Board board;
+    /**
+     * Checks if the given value is a valid Board title
+     *
+     * @param val
+     * @throws PropertyValidationException
+     */
+    public static void validateTitle(Object val) throws PropertyValidationException {
+        if (val == null)
+            throw new PropertyValidationException("No title given");
+        if (!(val instanceof String))
+            throw new PropertyValidationException("Title must be a string");
+        String title = (String) val;
+        if (title.length() <= 0)
+            throw new PropertyValidationException("Title must not be empty");
+        if (title.length() > 255)
+            throw new PropertyValidationException("Title must be shorter than 256 characters");
+    }
 
     public String getId() {
         return id;
