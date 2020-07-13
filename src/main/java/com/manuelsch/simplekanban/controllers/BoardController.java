@@ -34,8 +34,8 @@ public class BoardController {
     }
 
     @GetMapping
-    public Board getBoardById(@RequestParam("id") String id) {
-        return boardService.getBoardById(id).orElse(null);
+    public Board getBoardById(@RequestParam("id") String id) throws RecordNotFoundException {
+        return boardService.getBoardById(id);
     }
 
     @RequestMapping("/all")

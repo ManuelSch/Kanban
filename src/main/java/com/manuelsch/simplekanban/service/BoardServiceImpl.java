@@ -29,8 +29,8 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public Optional<Board> getBoardById(String id) {
-        return boardRepository.findById(id);
+    public Board getBoardById(String id) throws RecordNotFoundException {
+        return boardRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("No board with the given ID could be found"));
     }
 
     @Override
