@@ -63,24 +63,27 @@ public class Board {
         return id;
     }
 
-    public void setId(String id) {
+    public Board setId(String id) {
         this.id = id;
+        return this;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public Board setTitle(String title) {
         this.title = title;
+        return this;
     }
 
     public List<BoardColumn> getColumns() {
         return columns;
     }
 
-    public void setColumns(List<BoardColumn> columns) {
+    public Board setColumns(List<BoardColumn> columns) {
         this.columns = columns;
+        return this;
     }
 
     @Override

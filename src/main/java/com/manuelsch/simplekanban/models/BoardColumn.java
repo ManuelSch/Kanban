@@ -47,24 +47,27 @@ public class BoardColumn {
         return id;
     }
 
-    public void setId(String id) {
+    public BoardColumn setId(String id) {
         this.id = id;
+        return this;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public BoardColumn setTitle(String title) {
         this.title = title;
+        return this;
     }
 
     public Integer getPosition() {
         return position;
     }
 
-    public void setPosition(Integer position) {
+    public BoardColumn setPosition(Integer position) {
         this.position = position;
+        return this;
     }
 
     @Override

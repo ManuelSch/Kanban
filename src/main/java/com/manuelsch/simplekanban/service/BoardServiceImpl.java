@@ -22,8 +22,8 @@ public class BoardServiceImpl implements BoardService {
     @Override
     @Transactional
     public Board createBoard(String title) {
-        Board newBoard = new Board();
-        newBoard.setTitle(title);
+        Board newBoard = new Board()
+                .setTitle(title);
 
         return boardRepository.save(newBoard);
     }

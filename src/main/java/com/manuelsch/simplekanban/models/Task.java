@@ -18,31 +18,35 @@ public class Task {
         return title;
     }
 
-    public void setTitle(String title) {
+    public Task setTitle(String title) {
         this.title = title;
+        return this;
     }
 
     public Priority getPriority() {
         return priority;
     }
 
-    public void setPriority(Priority priority) {
+    public Task setPriority(Priority priority) {
         this.priority = priority;
+        return this;
     }
 
     public String getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public Task setColor(String color) {
         this.color = color;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public Task setDescription(String description) {
         this.description = description;
+        return this;
     }
 }

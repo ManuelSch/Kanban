@@ -26,9 +26,9 @@ public class BoardColumnServiceImpl implements BoardColumnService {
         Board board = boardRepository.findById(boardId)
                 .orElseThrow(() -> new RecordNotFoundException("No board with the given boardId could be found."));
 
-        BoardColumn newBoardColumn = new BoardColumn();
-        newBoardColumn.setTitle(title);
-        newBoardColumn.setPosition(board.getColumns().size());
+        BoardColumn newBoardColumn = new BoardColumn()
+                .setTitle(title)
+                .setPosition(board.getColumns().size());
 
         board.getColumns().add(newBoardColumn);
 
