@@ -42,4 +42,5 @@ public class BoardController {
     public List<Board> getAllBoards() {
         return boardService.getAllBoards();
     }
+
 }
