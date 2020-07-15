@@ -1,0 +1,11 @@
+<p>Create a new Kanban board:</p>
+<button mat-button color="primary" (click)="getAllBoards()">
+  <mat-icon>edit</mat-icon>
+  Get all boards
+</button>
+<button mat-button color="primary" (click)="createNewBoard()">
+  <mat-icon>add</mat-icon>
+  New Kanban Board
+</button>
+
+<pre>All boards: {{ allBoards | json }}</pre>
