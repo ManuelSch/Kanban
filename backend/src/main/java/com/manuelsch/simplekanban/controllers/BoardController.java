@@ -5,6 +5,7 @@ import com.manuelsch.simplekanban.DTOs.board.CreateBoardRequest;
 import com.manuelsch.simplekanban.DTOs.board.CreateBoardResponse;
 import com.manuelsch.simplekanban.DTOs.exceptionHandling.InputValidationException;
 import com.manuelsch.simplekanban.models.Board;
+import com.manuelsch.simplekanban.models.PropertyValidationException;
 import com.manuelsch.simplekanban.service.BoardService;
 import com.manuelsch.simplekanban.DTOs.exceptionHandling.RecordNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,13 +35,18 @@ public class BoardController {
     }
 
     @GetMapping
-    public Board getBoardById(@RequestParam("id") String id) throws RecordNotFoundException {
-        return boardService.getBoardById(id);
+    public SuccessResponse<Board> getBoardById(@RequestParam("id") String id)  throws InputValidationException, RecordNotFoundException {
+        try {
+            Board.validateId(id);
+        } catch (PropertyValidationException e) {
+            throw new InputValidationException(e.getMessage());
+        }
+        return new SuccessResponse<>(boardService.getBoardById(id));
     }
 
     @RequestMapping("/all")
-    public List<Board> getAllBoards() {
-        return boardService.getAllBoards();
+    public SuccessResponse<List<Board>> getAllBoards() {
+        return new SuccessResponse<>(boardService.getAllBoards());
     }
 
 }
