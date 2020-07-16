@@ -1,3 +1,9 @@
-<p>board works!</p>
-<span>{{ boardId | async }}</span>
+<div class="_board">
+  <h2>{{ board?.title }}</h2>
+  <div class="_columns">
+    <button mat-button color="primary">
+      <mat-icon>add</mat-icon>
+      New Column</button>
+  </div>
+</div>
 

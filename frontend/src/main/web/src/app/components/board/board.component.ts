@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { BoardService } from '../../services/board.service';
+import { Board } from '../../models/Board';
 
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
-  styleUrls: ['./board.component.scss']
+  styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent implements OnInit {
 
-  boardId: Observable<String> = this.route.paramMap.pipe(
-    map(params => params.get('boardId'))
-  );
+  board?: Board;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private boardService: BoardService) {
+  }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.board = await this.boardService.getBoardById(this.route.snapshot.params['boardId']);
   }
 
 }
