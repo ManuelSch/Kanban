@@ -13,7 +13,7 @@ export class BoardService {
     const body = {
       title,
     };
-    return this.apiService.post<Board[]>('/board', body);
+    return this.apiService.post<Board>('/board', body);
   }
 
   public async getBoardById(id: string): Promise<Board> {
