@@ -2,6 +2,17 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 
+export interface SuccessResponse<T> {
+  data: T;
+}
+
+export interface ErrorResponse {
+  error: true;
+  errorMsg: string;
+}
+
+export type ApiResponse<T> = SuccessResponse<T> | ErrorResponse;
+
 @Injectable({
   providedIn: 'root',
 })
@@ -12,12 +23,23 @@ export class ApiService {
   constructor(private http: HttpClient) {
   }
 
-  public async get(url: string): Promise<Object> {
-    return this.http.get(this.apiUrl + url).toPromise();
+  public async get<RES>(url: string): Promise<RES> {
+    const res = await this.http.get<ApiResponse<RES>>(this.apiUrl + url).toPromise();
+    return this.handleResponse(res);
   }
 
-  public async post(url: string, body: any | null): Promise<Object> {
-    return this.http.post(this.apiUrl + url, body).toPromise();
+  public async post<RES>(url: string, body: any | null): Promise<RES> {
+    const res = await this.http.post<ApiResponse<RES>>(this.apiUrl + url, body).toPromise();
+    return this.handleResponse(res);
+  }
+
+  private handleResponse<RES>(res: ApiResponse<RES>): RES {
+    if('error' in res && res.error && res.errorMsg) {
+      throw res.errorMsg;
+    }
+    else if ('data' in res && res.data) {
+      return res.data;
+    }
   }
 
 }
