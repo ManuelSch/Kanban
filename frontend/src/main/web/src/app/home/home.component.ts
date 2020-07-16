@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Location } from '@angular/common';
+import { BoardService } from '../services/board.service';
+import { Board } from '../models/Board';
 
 @Component({
   selector: 'app-home',
@@ -9,28 +9,21 @@ import { Location } from '@angular/common';
 })
 export class HomeComponent implements OnInit {
 
-  allBoards: unknown;
+  allBoards: Board[] = [];
 
-  constructor(private http: HttpClient, private location: Location) {
+  constructor(private boardService: BoardService) {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.getAllBoards();
   }
 
-  public createNewBoard() {
-    const body = {
-      title: 'My first Angular board',
-    };
-    const url = window.location.protocol + '//' + window.location.hostname + ':8080/api/board';
-    this.http.post(url, body).subscribe(res => {
-      console.log(res);
-    });
-    this.getAllBoards();
+  public async createNewBoard() {
+    await this.boardService.createNewBoard('My first Angular board');
+    await this.getAllBoards();
   }
 
-  public getAllBoards() {
-    const url = window.location.protocol + '//' + window.location.hostname + ':8080/api/board/all';
-    this.http.get(url).subscribe(res => this.allBoards = res);
+  public async getAllBoards() {
+    this.allBoards = await this.boardService.getAllBoards();
   }
 }
