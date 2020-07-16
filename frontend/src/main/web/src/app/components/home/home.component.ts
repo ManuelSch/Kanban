@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BoardService } from '../../services/board.service';
 import { Board } from '../../models/Board';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   allBoards: Board[] = [];
 
-  constructor(private boardService: BoardService) {
+  constructor(private boardService: BoardService, private router: Router) {
   }
 
   ngOnInit() {
@@ -19,8 +20,8 @@ export class HomeComponent implements OnInit {
   }
 
   public async createNewBoard() {
-    await this.boardService.createBoard('My first Angular board');
-    await this.getAllBoards();
+    const createdBoard = await this.boardService.createBoard('My first Angular board');
+    this.router.navigateByUrl(`/${createdBoard.id}`);
   }
 
   public async getAllBoards() {
