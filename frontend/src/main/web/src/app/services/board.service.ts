@@ -16,6 +16,10 @@ export class BoardService {
     return this.apiService.post<Board[]>('/board', body);
   }
 
+  public async getBoardById(id: string): Promise<Board> {
+    return this.apiService.get<Board>('/board', { id })
+  }
+
   public async getAllBoards(): Promise<Board[]> {
     return this.apiService.get<Board[]>('/board/all');
   }
