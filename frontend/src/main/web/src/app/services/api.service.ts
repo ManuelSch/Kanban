@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { StringDictionary } from '../util/Dictionary';
+import { toQueryParamsString } from '../util/toQueryParamsString';
 
 export interface SuccessResponse<T> {
   data: T;
@@ -23,8 +25,9 @@ export class ApiService {
   constructor(private http: HttpClient) {
   }
 
-  public async get<RES>(url: string): Promise<RES> {
-    const res = await this.http.get<ApiResponse<RES>>(this.apiUrl + url).toPromise();
+  public async get<RES>(url: string, queryParams: StringDictionary = {}): Promise<RES> {
+    const params = toQueryParamsString(queryParams);
+    const res = await this.http.get<ApiResponse<RES>>(this.apiUrl + url + params).toPromise();
     return this.handleResponse(res);
   }
 
