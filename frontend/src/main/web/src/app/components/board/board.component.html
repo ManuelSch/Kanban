@@ -1,9 +1,10 @@
 <div class="_board">
   <h2>{{ board?.title }}</h2>
   <div class="_columns">
-    <button mat-button color="primary">
+    <button mat-button color="primary" (click)="createNewColumn()">
       <mat-icon>add</mat-icon>
       New Column</button>
   </div>
+  <pre>{{ board | json }}</pre>
 </div>
 
