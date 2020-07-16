@@ -4,9 +4,11 @@ import com.manuelsch.simplekanban.DTOs.SuccessResponse;
 import com.manuelsch.simplekanban.DTOs.boardColumn.CreateBoardColumnRequest;
 import com.manuelsch.simplekanban.DTOs.boardColumn.CreateBoardColumnResponse;
 import com.manuelsch.simplekanban.DTOs.exceptionHandling.InputValidationException;
+import com.manuelsch.simplekanban.models.Board;
 import com.manuelsch.simplekanban.models.BoardColumn;
 import com.manuelsch.simplekanban.service.BoardColumnService;
 import com.manuelsch.simplekanban.DTOs.exceptionHandling.RecordNotFoundException;
+import com.manuelsch.simplekanban.service.BoardService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,15 +22,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class BoardColumnController {
 
     BoardColumnService boardColumnService;
+    BoardService boardService;
 
-    public BoardColumnController(BoardColumnService boardColumnService) {
+    public BoardColumnController(BoardColumnService boardColumnService, BoardService boardService) {
         this.boardColumnService = boardColumnService;
+        this.boardService = boardService;
     }
 
     @PostMapping
     public SuccessResponse<CreateBoardColumnResponse> createBoardColumn(@RequestBody CreateBoardColumnRequest newBoardColumn) throws InputValidationException, RecordNotFoundException {
         newBoardColumn.validate();
-        BoardColumn createdColumn = boardColumnService.createColumn(newBoardColumn.getTitle(), newBoardColumn.getBoardId());
-        return new SuccessResponse<>(new CreateBoardColumnResponse(createdColumn));
+        boardColumnService.createColumn(newBoardColumn.getTitle(), newBoardColumn.getBoardId());
+        Board updatedBoard = boardService.getBoardById(newBoardColumn.getBoardId());
+        return new SuccessResponse<>(new CreateBoardColumnResponse(updatedBoard));
     }
 }
