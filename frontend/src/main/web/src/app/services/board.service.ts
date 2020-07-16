@@ -9,7 +9,7 @@ export class BoardService {
 
   constructor(private apiService: ApiService) { }
 
-  public async createNewBoard(title: string) {
+  public async createBoard(title: string) {
     const body = {
       title,
     };

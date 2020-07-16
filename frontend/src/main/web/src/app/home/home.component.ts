@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   }
 
   public async createNewBoard() {
-    await this.boardService.createNewBoard('My first Angular board');
+    await this.boardService.createBoard('My first Angular board');
     await this.getAllBoards();
   }
 
