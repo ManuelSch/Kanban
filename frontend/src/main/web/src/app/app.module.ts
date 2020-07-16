@@ -10,12 +10,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './services/api.service';
+import { BoardService } from './services/board.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     BoardComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,8 +27,10 @@ import { ApiService } from './services/api.service';
     MatButtonModule,
   ],
   providers: [
-    ApiService
+    ApiService,
+    BoardService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+}
