@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BoardService } from '../services/board.service';
-import { Board } from '../models/Board';
+import { BoardService } from '../../services/board.service';
+import { Board } from '../../models/Board';
 
 @Component({
   selector: 'app-home',
