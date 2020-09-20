@@ -1,10 +1,11 @@
 <div class="_board">
-  <h2>{{ board?.title }}</h2>
+  <h2 class="_board-title">{{ board?.title }}</h2>
   <div class="_columns">
+    <app-board-column *ngFor="let column of board?.columns" [column]="column"></app-board-column>
     <button mat-button color="primary" (click)="createNewColumn()">
       <mat-icon>add</mat-icon>
       New Column</button>
   </div>
-  <pre>{{ board | json }}</pre>
+<!--  <pre>{{ board | json }}</pre>-->
 </div>
 
