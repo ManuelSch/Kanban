@@ -11,12 +11,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './services/api.service';
 import { BoardService } from './services/board.service';
+import { BoardColumnComponent } from './components/board/board-column/board-column.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BoardComponent,
     HomeComponent,
+    BoardColumnComponent,
   ],
   imports: [
     BrowserModule,
