@@ -28,7 +28,7 @@ public class BoardController {
     }
 
     @PostMapping
-    public SuccessResponse<CreateBoardResponse> createBoard(@RequestBody CreateBoardRequest newBoard) throws InputValidationException, RecordNotFoundException {
+    public SuccessResponse<CreateBoardResponse> createBoard(@RequestBody CreateBoardRequest newBoard) throws InputValidationException {
         newBoard.validate();
         Board createdBoard = boardService.createBoard(newBoard.getTitle());
         return new SuccessResponse<>(new CreateBoardResponse(createdBoard));

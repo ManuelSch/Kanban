@@ -17,7 +17,7 @@ public interface BoardService {
      * @return
      * @throws AssertionError
      */
-    Board createBoard(String title) throws RecordNotFoundException;
+    Board createBoard(String title);
 
     /**
      * Returns the Kanban board with the given ID
