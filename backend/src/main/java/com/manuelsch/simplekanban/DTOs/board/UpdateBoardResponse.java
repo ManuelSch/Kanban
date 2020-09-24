@@ -4,8 +4,7 @@ import com.manuelsch.simplekanban.DTOs.Response;
 import com.manuelsch.simplekanban.models.Board;
 import com.manuelsch.simplekanban.models.BoardColumn;
 
-import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 public class UpdateBoardResponse implements Response {
 
@@ -13,7 +12,7 @@ public class UpdateBoardResponse implements Response {
 
     private String title;
 
-    private List<BoardColumn> columns;
+    private Set<BoardColumn> columns;
 
     public UpdateBoardResponse(Board board) {
         setId(board.getId());
@@ -37,11 +36,11 @@ public class UpdateBoardResponse implements Response {
         this.title = title;
     }
 
-    public List<BoardColumn> getColumns() {
+    public Set<BoardColumn> getColumns() {
         return columns;
     }
 
-    public void setColumns(List<BoardColumn> columns) {
+    public void setColumns(Set<BoardColumn> columns) {
         this.columns = columns;
     }
 

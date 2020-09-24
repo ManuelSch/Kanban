@@ -1,11 +1,12 @@
 package com.manuelsch.simplekanban.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A Kanban board
@@ -21,8 +22,9 @@ public class Board {
     @Column
     private String title;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<BoardColumn> columns = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "board")
+    @JsonManagedReference
+    private Set<BoardColumn> columns = new HashSet<>();
 
 
     /**
@@ -77,11 +79,11 @@ public class Board {
         return this;
     }
 
-    public List<BoardColumn> getColumns() {
+    public Set<BoardColumn> getColumns() {
         return columns;
     }
 
-    public Board setColumns(List<BoardColumn> columns) {
+    public Board setColumns(Set<BoardColumn> columns) {
         this.columns = columns;
         return this;
     }

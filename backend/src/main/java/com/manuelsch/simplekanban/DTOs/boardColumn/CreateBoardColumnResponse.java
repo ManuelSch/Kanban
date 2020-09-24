@@ -1,9 +1,10 @@
 package com.manuelsch.simplekanban.DTOs.boardColumn;
 
+import com.manuelsch.simplekanban.DTOs.Response;
 import com.manuelsch.simplekanban.models.Board;
 import com.manuelsch.simplekanban.models.BoardColumn;
 
-import java.util.List;
+import java.util.Set;
 
 public class CreateBoardColumnResponse implements Response {
 
@@ -11,7 +12,7 @@ public class CreateBoardColumnResponse implements Response {
 
     private String title;
 
-    private List<BoardColumn> columns;
+    private Set<BoardColumn> columns;
 
     public CreateBoardColumnResponse(Board board) {
         setId(board.getId());
@@ -37,11 +38,11 @@ public class CreateBoardColumnResponse implements Response {
         return this;
     }
 
-    public List<BoardColumn> getColumns() {
+    public Set<BoardColumn> getColumns() {
         return columns;
     }
 
-    public CreateBoardColumnResponse setColumns(List<BoardColumn> columns) {
+    public CreateBoardColumnResponse setColumns(Set<BoardColumn> columns) {
         this.columns = columns;
         return this;
     }
