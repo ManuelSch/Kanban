@@ -1,16 +1,33 @@
 package com.manuelsch.simplekanban.models;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  * A Kanban task/item
  */
+@Entity
 public class Task {
 
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String id;
+
+    @Column
     private String title;
 
+    @Column
     private Priority priority;
 
+    @Column
     private String color;
 
+    @Column
     private String description;
 
 
