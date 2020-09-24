@@ -3,6 +3,7 @@ package com.manuelsch.simplekanban.DTOs.boardColumn;
 import com.manuelsch.simplekanban.DTOs.Request;
 import com.manuelsch.simplekanban.DTOs.exceptionHandling.InputValidationException;
 import com.manuelsch.simplekanban.models.Board;
+import com.manuelsch.simplekanban.models.BoardColumn;
 import com.manuelsch.simplekanban.models.PropertyValidationException;
 
 public class CreateBoardColumnRequest implements Request {
@@ -31,7 +32,8 @@ public class CreateBoardColumnRequest implements Request {
     public void validate() throws InputValidationException {
         try {
             Board.validateId(getBoardId());
-            Board.validateTitle(getTitle());
+            if (getTitle() != null)
+                BoardColumn.validateTitle(getTitle());
         } catch (PropertyValidationException e) {
             throw new InputValidationException(e.getMessage());
         }
