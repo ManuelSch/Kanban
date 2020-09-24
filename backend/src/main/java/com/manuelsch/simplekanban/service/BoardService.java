@@ -34,4 +34,14 @@ public interface BoardService {
      */
     List<Board> getAllBoards();
 
+    /**
+     * Updates an existing Kanban board
+     *
+     * @param id
+     * @param title
+     * @return
+     * @throws RecordNotFoundException
+     */
+    Board updateBoard(String id, String title) throws RecordNotFoundException;
+
 }

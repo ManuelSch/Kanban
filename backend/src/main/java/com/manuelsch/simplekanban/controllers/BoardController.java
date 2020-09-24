@@ -3,6 +3,8 @@ package com.manuelsch.simplekanban.controllers;
 import com.manuelsch.simplekanban.DTOs.SuccessResponse;
 import com.manuelsch.simplekanban.DTOs.board.CreateBoardRequest;
 import com.manuelsch.simplekanban.DTOs.board.CreateBoardResponse;
+import com.manuelsch.simplekanban.DTOs.board.UpdateBoardRequest;
+import com.manuelsch.simplekanban.DTOs.board.UpdateBoardResponse;
 import com.manuelsch.simplekanban.DTOs.exceptionHandling.InputValidationException;
 import com.manuelsch.simplekanban.models.Board;
 import com.manuelsch.simplekanban.models.PropertyValidationException;
@@ -47,6 +49,13 @@ public class BoardController {
     @RequestMapping("/all")
     public SuccessResponse<List<Board>> getAllBoards() {
         return new SuccessResponse<>(boardService.getAllBoards());
+    }
+
+    @PostMapping("/update")
+    public SuccessResponse<UpdateBoardResponse> updateBoard(@RequestBody UpdateBoardRequest updatedBoardData) throws InputValidationException, RecordNotFoundException {
+        updatedBoardData.validate();
+        Board updatedBoard = boardService.updateBoard(updatedBoardData.getId(), updatedBoardData.getTitle());
+        return new SuccessResponse<>(new UpdateBoardResponse(updatedBoard));
     }
 
 }

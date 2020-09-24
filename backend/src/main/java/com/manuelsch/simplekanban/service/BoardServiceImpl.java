@@ -6,6 +6,7 @@ import com.manuelsch.simplekanban.repositories.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -36,6 +37,19 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public List<Board> getAllBoards() {
         return boardRepository.findAll();
+    }
+
+    @Override
+    @Transactional
+    public Board updateBoard(String id, String title) throws RecordNotFoundException {
+        try {
+            Board board = boardRepository.getOne(id)
+                    .setTitle(title);
+            return boardRepository.save(board);
+        }
+        catch (EntityNotFoundException e) {
+            throw new RecordNotFoundException("No board with the given ID could be found");
+        }
     }
 
 
