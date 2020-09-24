@@ -1,12 +1,11 @@
 package com.manuelsch.simplekanban.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.util.Objects;
+import javax.persistence.*;
+import java.util.*;
 
 /**
  * A single column of a Kanban board
@@ -24,6 +23,15 @@ public class BoardColumn {
 
     @Column
     private Integer position;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Set<Task> tasks = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn
+    @JsonBackReference
+    private Board board;
 
     /**
      * Checks if the given value is a valid BoardColumn id
@@ -102,25 +110,38 @@ public class BoardColumn {
         return this;
     }
 
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public BoardColumn setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
+        return this;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public BoardColumn setBoard(Board board) {
+        this.board = board;
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BoardColumn that = (BoardColumn) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(id, that.id) &&
+                Objects.equals(title, that.title) &&
+                Objects.equals(position, that.position) &&
+                Objects.equals(tasks, that.tasks) &&
+                Objects.equals(board, that.board);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "BoardColumn{" +
-                "id='" + id + '\'' +
-                ", title='" + title + '\'' +
-                ", position=" + position +
-                '}';
+        return Objects.hash(id, title, position, tasks, board);
     }
 }
