@@ -22,7 +22,7 @@ public class BoardColumnServiceImpl implements BoardColumnService {
 
     @Override
     @Transactional
-    public BoardColumn createColumn(String title, String boardId) throws EntityNotFoundException, RecordNotFoundException {
+    public BoardColumn createColumn(String title, String boardId) throws RecordNotFoundException {
         Board board = boardRepository.findById(boardId)
                 .orElseThrow(() -> new RecordNotFoundException("No board with the given boardId could be found."));
 

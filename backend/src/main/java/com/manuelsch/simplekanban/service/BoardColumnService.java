@@ -12,10 +12,11 @@ public interface BoardColumnService {
 
     /**
      * Adds a new column to an existing Kanban board
+     *
      * @param title
      * @param boardId
      * @return
      */
-    public BoardColumn createColumn(String title, String boardId) throws EntityNotFoundException, RecordNotFoundException;
+    BoardColumn createColumn(String title, String boardId) throws RecordNotFoundException;
 
 }
