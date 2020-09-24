@@ -19,4 +19,14 @@ public interface BoardColumnService {
      */
     BoardColumn createColumn(String title, String boardId) throws RecordNotFoundException;
 
+    /**
+     * Updates the column with the given data
+     *
+     * @param id
+     * @param title
+     * @param position
+     * @return
+     * @throws RecordNotFoundException
+     */
+    BoardColumn updateColumn(String id, String title, Integer position) throws RecordNotFoundException;
 }
