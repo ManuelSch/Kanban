@@ -1,12 +1,13 @@
 package com.manuelsch.simplekanban.DTOs.board;
 
+import com.manuelsch.simplekanban.DTOs.Response;
 import com.manuelsch.simplekanban.models.Board;
 import com.manuelsch.simplekanban.models.BoardColumn;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class CreateBoardResponse implements Serializable {
+public class CreateBoardResponse implements Response {
 
     private String id;
 

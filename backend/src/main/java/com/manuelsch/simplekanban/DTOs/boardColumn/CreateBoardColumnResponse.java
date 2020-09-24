@@ -5,7 +5,7 @@ import com.manuelsch.simplekanban.models.BoardColumn;
 
 import java.util.List;
 
-public class CreateBoardColumnResponse {
+public class CreateBoardColumnResponse implements Response {
 
     private String id;
 

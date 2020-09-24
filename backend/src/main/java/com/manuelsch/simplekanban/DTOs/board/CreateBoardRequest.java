@@ -1,12 +1,11 @@
 package com.manuelsch.simplekanban.DTOs.board;
 
+import com.manuelsch.simplekanban.DTOs.Request;
 import com.manuelsch.simplekanban.DTOs.exceptionHandling.InputValidationException;
 import com.manuelsch.simplekanban.models.Board;
 import com.manuelsch.simplekanban.models.PropertyValidationException;
 
-import java.io.Serializable;
-
-public class CreateBoardRequest implements Serializable {
+public class CreateBoardRequest implements Request {
 
     private String title;
 
@@ -18,6 +17,7 @@ public class CreateBoardRequest implements Serializable {
         this.title = title;
     }
 
+    @Override
     public void validate() throws InputValidationException {
         try {
             Board.validateTitle(getTitle());
