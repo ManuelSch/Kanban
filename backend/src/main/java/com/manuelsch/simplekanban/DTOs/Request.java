@@ -2,7 +2,9 @@ package com.manuelsch.simplekanban.DTOs;
 
 import com.manuelsch.simplekanban.DTOs.exceptionHandling.InputValidationException;
 
-public interface Request {
+import java.io.Serializable;
+
+public interface Request extends Serializable {
 
     void validate() throws InputValidationException;
 
