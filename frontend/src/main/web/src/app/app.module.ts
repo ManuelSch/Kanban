@@ -13,6 +13,7 @@ import { ApiService } from './services/api.service';
 import { BoardService } from './services/board.service';
 import { BoardColumnComponent } from './components/board/board-column/board-column.component';
 import { MatCardModule } from '@angular/material/card';
+import { TaskComponent } from './components/board/board-column/task/task.component';
 import { MatRippleModule } from '@angular/material/core';
 
 @NgModule({
@@ -21,6 +22,7 @@ import { MatRippleModule } from '@angular/material/core';
     BoardComponent,
     HomeComponent,
     BoardColumnComponent,
+    TaskComponent,
   ],
     imports: [
         BrowserModule,

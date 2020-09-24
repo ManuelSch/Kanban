@@ -17,4 +17,12 @@ export class BoardColumnService {
     };
     return this.apiService.post('/boardColumn', body);
   }
+
+  public async updateBoardColumn(id: string, data: {title?: string, position?: number}): Promise<Board> {
+    const body = {
+      id,
+      ...data,
+    };
+    return this.apiService.post('/boardColumn/update', body)
+  }
 }

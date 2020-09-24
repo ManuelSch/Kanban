@@ -26,7 +26,23 @@ public class BoardColumn {
     private Integer position;
 
     /**
-     * Checks if the given value is a valid Board title
+     * Checks if the given value is a valid BoardColumn id
+     *
+     * @param val
+     * @throws PropertyValidationException
+     */
+    public static void validateId(Object val) throws PropertyValidationException {
+        if (val == null)
+            throw new PropertyValidationException("No ID given");
+        if (!(val instanceof String))
+            throw new PropertyValidationException("ID must be a string");
+        String id = (String) val;
+        if (id.length() > 255)
+            throw new PropertyValidationException("ID must be a valid UUID");
+    }
+
+    /**
+     * Checks if the given value is a valid BoardColumn title
      *
      * @param val
      * @throws PropertyValidationException
@@ -41,6 +57,22 @@ public class BoardColumn {
             throw new PropertyValidationException("Title must not be empty");
         if (title.length() > 255)
             throw new PropertyValidationException("Title must be shorter than 256 characters");
+    }
+
+    /**
+     * Checks if the given value is a valid BoardColumn position
+     *
+     * @param val
+     * @throws PropertyValidationException
+     */
+    public static void validatePosition(Object val) throws PropertyValidationException {
+        if (val == null)
+            throw new PropertyValidationException("No position given");
+        if (!(val instanceof Integer))
+            throw new PropertyValidationException("Position must be an integer");
+        Integer position = (Integer) val;
+        if (position < 0)
+            throw new PropertyValidationException("Position must not be negative");
     }
 
     public String getId() {
