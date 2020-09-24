@@ -1,5 +1,7 @@
 <div class="_board">
-  <h2 class="_board-title">{{ board?.title }}</h2>
+  <div>
+    <h2 matRipple #boardTitle class="_board-title _clickable" (click)="editBoardTitle()">{{ board?.title }}</h2>
+  </div>
   <div class="_columns">
     <app-board-column *ngFor="let column of board?.columns" [column]="column"></app-board-column>
     <button mat-button color="primary" (click)="createNewColumn()">

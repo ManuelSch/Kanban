@@ -23,4 +23,12 @@ export class BoardService {
   public async getAllBoards(): Promise<Board[]> {
     return this.apiService.get<Board[]>('/board/all');
   }
+
+  public async updateBoard(id: string, title: string): Promise<Board> {
+    const body = {
+      id,
+      title
+    };
+    return this.apiService.post('/board/update', body)
+  }
 }

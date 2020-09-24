@@ -12,6 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './services/api.service';
 import { BoardService } from './services/board.service';
 import { BoardColumnComponent } from './components/board/board-column/board-column.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatRippleModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -20,14 +22,16 @@ import { BoardColumnComponent } from './components/board/board-column/board-colu
     HomeComponent,
     BoardColumnComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    MatIconModule,
-    MatButtonModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        MatIconModule,
+        MatButtonModule,
+        MatCardModule,
+        MatRippleModule,
+    ],
   providers: [
     ApiService,
     BoardService,
