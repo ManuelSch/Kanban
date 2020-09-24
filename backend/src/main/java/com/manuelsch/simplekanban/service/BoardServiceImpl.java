@@ -42,15 +42,10 @@ public class BoardServiceImpl implements BoardService {
     @Override
     @Transactional
     public Board updateBoard(String id, String title) throws RecordNotFoundException {
-        try {
-            Board board = boardRepository.getOne(id)
-                    .setTitle(title);
-            return boardRepository.save(board);
-        }
-        catch (EntityNotFoundException e) {
-            throw new RecordNotFoundException("No board with the given ID could be found");
-        }
+        Board board = boardRepository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException("No board with the given ID could be found"))
+                .setTitle(title);
+        return boardRepository.save(board);
     }
-
 
 }
