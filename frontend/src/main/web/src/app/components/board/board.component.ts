@@ -4,6 +4,7 @@ import { BoardService } from '../../services/board.service';
 import { Board } from '../../models/Board';
 import { BoardColumnService } from '../../services/board-column.service';
 import { MatRipple } from '@angular/material/core';
+import { BoardColumn } from '../../models/BoardColumn';
 
 @Component({
   selector: 'app-board',
@@ -17,6 +18,10 @@ export class BoardComponent {
 
   board?: Board;
 
+  get sortedColumns() {
+    return ((this.board || {}).columns || []).sort((a, b) => a.position - b.position);
+  }
+
   constructor(private route: ActivatedRoute, private router: Router, private boardService: BoardService, private boardColumnService: BoardColumnService) {
   }
 
@@ -25,7 +30,6 @@ export class BoardComponent {
 
     try {
       this.board = await this.boardService.getBoardById(this.route.snapshot.params['boardId']);
-      this.board.columns = this.board.columns.sort((a, b) => a.position - b.position);
     }
     catch (e) {
       await this.router.navigateByUrl('/');
