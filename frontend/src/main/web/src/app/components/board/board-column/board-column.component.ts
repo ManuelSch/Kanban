@@ -21,7 +21,7 @@ export class BoardColumnComponent implements OnInit {
   async editColumnTitle() {
     const title = prompt('Column name', this.column.title);
     if (title && title !== this.column.title) {
-      this.column = await this.boardColumnService.updateBoardColumn(this.column.id, { title });
+      Object.assign(this.column, await this.boardColumnService.updateBoardColumn(this.column.id, { title }));
     }
   }
 }
