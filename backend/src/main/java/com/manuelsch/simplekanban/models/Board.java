@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * A Kanban board
@@ -25,7 +26,6 @@ public class Board {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "board")
     @JsonManagedReference
     private Set<BoardColumn> columns = new HashSet<>();
-
 
     /**
      * Checks if the given value is a valid Board id
@@ -106,7 +106,7 @@ public class Board {
         return "Board{" +
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
-                ", columns=" + columns +
+                ", columns=" + columns.stream().map(BoardColumn::getId).collect(Collectors.joining()) +
                 '}';
     }
 }

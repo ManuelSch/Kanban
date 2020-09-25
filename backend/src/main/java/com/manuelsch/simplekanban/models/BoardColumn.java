@@ -5,7 +5,10 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * A single column of a Kanban board
@@ -143,5 +146,16 @@ public class BoardColumn {
     @Override
     public int hashCode() {
         return Objects.hash(id, title, position, tasks, board);
+    }
+
+    @Override
+    public String toString() {
+        return "BoardColumn{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", position=" + position +
+                ", tasks=" + tasks.stream().map(Task::getTitle).collect(Collectors.joining()) +
+                ", board=" + (board != null ? board.getId() : null) +
+                '}';
     }
 }
