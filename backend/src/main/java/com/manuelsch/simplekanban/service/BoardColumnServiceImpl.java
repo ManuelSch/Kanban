@@ -33,10 +33,10 @@ public class BoardColumnServiceImpl implements BoardColumnService {
                 .setPosition(board.getColumns().size());
 
         board.getColumns().add(newBoardColumn);
+        Board updatedBoard = boardRepository.save(board);
 
-        boardRepository.save(board);
-
-        return newBoardColumn;
+        newBoardColumn.setBoard(updatedBoard);
+        return columnRepository.save(newBoardColumn);
     }
 
     @Override
@@ -45,10 +45,10 @@ public class BoardColumnServiceImpl implements BoardColumnService {
         BoardColumn column = columnRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("No boardColumn with the given ID could be found"));
 
-        if(title != null)
+        if (title != null)
             column.setTitle(title);
 
-        if(position != null)
+        if (position != null)
             column.setPosition(position);
 
         return columnRepository.save(column);
