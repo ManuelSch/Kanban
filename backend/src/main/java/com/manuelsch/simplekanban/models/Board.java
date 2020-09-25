@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -26,6 +27,11 @@ public class Board {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "board")
     @JsonManagedReference
     private Set<BoardColumn> columns = new HashSet<>();
+
+
+    public Optional<BoardColumn> getColumnAtPosition(Integer position) {
+        return getColumns().stream().filter(col -> col.getPosition().equals(position)).findFirst();
+    }
 
     /**
      * Checks if the given value is a valid Board id

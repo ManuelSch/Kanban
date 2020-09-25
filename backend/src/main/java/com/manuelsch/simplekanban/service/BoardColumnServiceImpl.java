@@ -35,7 +35,13 @@ public class BoardColumnServiceImpl implements BoardColumnService {
         board.getColumns().add(newBoardColumn);
         Board updatedBoard = boardRepository.save(board);
 
+        newBoardColumn.setId(updatedBoard
+                .getColumnAtPosition(newBoardColumn.getPosition())
+                .orElseThrow(() -> new RecordNotFoundException("BoardColumn could not be saved"))
+                .getId()
+        );
         newBoardColumn.setBoard(updatedBoard);
+
         return columnRepository.save(newBoardColumn);
     }
 
