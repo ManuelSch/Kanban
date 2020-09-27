@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -35,6 +36,11 @@ public class BoardColumn {
     @JoinColumn
     @JsonBackReference
     private Board board;
+
+
+    public Optional<Task> getTaskById(String id) {
+        return this.getTasks().stream().filter(task -> id.equals(task.getId())).findFirst();
+    }
 
     /**
      * Checks if the given value is a valid BoardColumn id
