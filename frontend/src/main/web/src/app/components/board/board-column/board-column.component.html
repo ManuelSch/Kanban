@@ -3,9 +3,9 @@
     {{ column?.title }}
   </mat-card-title>
   <mat-card-content class="_tasks">
-    <div class="_task">Task 1</div>
-    <div class="_task">Task 2</div>
-    <div class="_task">Task 3</div>
-    <div class="_task">...</div>
+    <app-task *ngFor="let task of column?.tasks" [task]="task"></app-task>
+    <button mat-button color="primary" (click)="createNewTask()">
+      <mat-icon>add</mat-icon>
+      New Task</button>
   </mat-card-content>
 </mat-card>
