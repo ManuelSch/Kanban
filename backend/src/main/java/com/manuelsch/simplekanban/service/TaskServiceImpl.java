@@ -43,4 +43,24 @@ public class TaskServiceImpl implements TaskService {
         return taskRepository.save(createdTask);
     }
 
+    @Override
+    public Task updateTask(String id, String title, Priority priority, String color, String description) throws RecordNotFoundException {
+        Task existingTask = taskRepository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException("No task with the given ID could be found."));
+
+        if (title != null)
+            existingTask.setTitle(title);
+
+        if (priority != null)
+            existingTask.setPriority(priority);
+
+        if (color != null)
+            existingTask.setColor(color);
+
+        if (description != null)
+            existingTask.setDescription(description);
+
+        return taskRepository.save(existingTask);
+    }
+
 }

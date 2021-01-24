@@ -5,6 +5,8 @@ import com.manuelsch.simplekanban.DTOs.exceptionHandling.InputValidationExceptio
 import com.manuelsch.simplekanban.DTOs.exceptionHandling.RecordNotFoundException;
 import com.manuelsch.simplekanban.DTOs.task.CreateTaskRequest;
 import com.manuelsch.simplekanban.DTOs.task.CreateTaskResponse;
+import com.manuelsch.simplekanban.DTOs.task.UpdateTaskRequest;
+import com.manuelsch.simplekanban.DTOs.task.UpdateTaskResponse;
 import com.manuelsch.simplekanban.models.Task;
 import com.manuelsch.simplekanban.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,19 @@ public class TaskController {
         newTask.validate();
         Task createdTask = taskService.createTask(newTask.getBoardColumnId(), newTask.getTitle());
         return new SuccessResponse<>(new CreateTaskResponse(createdTask));
+    }
+
+    @PostMapping("/update")
+    public SuccessResponse<UpdateTaskResponse> updateTask(@RequestBody UpdateTaskRequest updatedTaskData) throws InputValidationException, RecordNotFoundException {
+        updatedTaskData.validate();
+        Task updatedTask = taskService.updateTask(
+                updatedTaskData.getId(),
+                updatedTaskData.getTitle(),
+                updatedTaskData.getPriority(),
+                updatedTaskData.getColor(),
+                updatedTaskData.getDescription()
+        );
+        return new SuccessResponse<>(new UpdateTaskResponse(updatedTask));
     }
 
 }

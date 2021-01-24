@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Arrays;
 
 /**
  * A Kanban task/item
@@ -35,6 +36,22 @@ public class Task {
 
 
     /**
+     * Checks if the given value is a valid Task id
+     *
+     * @param val
+     * @throws PropertyValidationException
+     */
+    public static void validateId(Object val) throws PropertyValidationException {
+        if (val == null)
+            throw new PropertyValidationException("No ID given");
+        if (!(val instanceof String))
+            throw new PropertyValidationException("ID must be a string");
+        String id = (String) val;
+        if (id.length() > 255)
+            throw new PropertyValidationException("ID must be a valid UUID");
+    }
+
+    /**
      * Checks if the given value is a valid Task title
      *
      * @param val
@@ -50,6 +67,54 @@ public class Task {
             throw new PropertyValidationException("Title must not be empty");
         if (title.length() > 255)
             throw new PropertyValidationException("Title must be shorter than 256 characters");
+    }
+
+    /**
+     * Checks if the given value is a valid Task priority
+     *
+     * @param val
+     * @throws PropertyValidationException
+     */
+    public static void validatePriority(Object val) throws PropertyValidationException {
+        if (val == null)
+            throw new PropertyValidationException("No priority given");
+        if (!(val instanceof Priority))
+            throw new PropertyValidationException("Priority must be one of the following strings: " + Arrays.toString(Priority.values()));
+    }
+
+    /**
+     * Checks if the given value is a valid Task color
+     *
+     * @param val
+     * @throws PropertyValidationException
+     */
+    public static void validateColor(Object val) throws PropertyValidationException {
+        if (val == null)
+            throw new PropertyValidationException("No color given");
+        if (!(val instanceof String))
+            throw new PropertyValidationException("Color must be a string");
+        String color = (String) val;
+        if (color.length() <= 0)
+            throw new PropertyValidationException("Color must not be empty");
+        if (color.length() > 16)
+            throw new PropertyValidationException("Color must be shorter than 16 characters");
+    }
+
+
+    /**
+     * Checks if the given value is a valid Task description
+     *
+     * @param val
+     * @throws PropertyValidationException
+     */
+    public static void validateDescription(Object val) throws PropertyValidationException {
+        if (val == null)
+            throw new PropertyValidationException("No description given");
+        if (!(val instanceof String))
+            throw new PropertyValidationException("Description must be a string");
+        String description = (String) val;
+        if (description.length() > 1024)
+            throw new PropertyValidationException("Description must be shorter than 1024 characters");
     }
 
 
