@@ -1,0 +1,11 @@
+._task {
+  ._task-header {
+    display: flex;
+    flex-direction: row;
+
+    ._task-title {
+      flex-grow: 1;
+    }
+  }
+}
+

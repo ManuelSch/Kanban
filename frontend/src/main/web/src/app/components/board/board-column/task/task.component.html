@@ -1,3 +1,16 @@
-<div class="_task">
-  <div>{{ task?.title }}</div>
-</div>
+<mat-card [ngStyle]="{ backgroundColor: task?.color }" class="_task">
+  <mat-card-title class="_task-header">
+    <div (click)="editTaskTitle()" class="_task-title _clickable" title="Change title">
+      {{ task?.title }}
+    </div>
+    <div (click)="toggleTaskPriority()" class="_task-priority-btn _clickable" title="Change priority">
+      {{ priorityIcon }}
+    </div>
+    <div (click)="selectTaskColor()" class="_task-color-btn _clickable" title="Change color">
+      🎨
+    </div>
+  </mat-card-title>
+  <mat-card-content (click)="editTaskDescription()" class="_task-description _clickable" title="Change description">
+    {{ task?.description }}
+  </mat-card-content>
+</mat-card>

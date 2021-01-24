@@ -5,4 +5,5 @@ export class Task {
     title: string;
     color?: string;
     priority?: Priority;
+  description?: string;
 }
