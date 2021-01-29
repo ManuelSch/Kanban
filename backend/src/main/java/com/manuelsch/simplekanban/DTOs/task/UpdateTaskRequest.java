@@ -2,6 +2,7 @@ package com.manuelsch.simplekanban.DTOs.task;
 
 import com.manuelsch.simplekanban.DTOs.Request;
 import com.manuelsch.simplekanban.DTOs.exceptionHandling.InputValidationException;
+import com.manuelsch.simplekanban.models.BoardColumn;
 import com.manuelsch.simplekanban.models.Priority;
 import com.manuelsch.simplekanban.models.PropertyValidationException;
 import com.manuelsch.simplekanban.models.Task;
@@ -10,7 +11,11 @@ public class UpdateTaskRequest implements Request {
 
     private String id;
 
+    private String boardColumnId;
+
     private String title;
+
+    private Integer position;
 
     private Priority priority;
 
@@ -22,8 +27,12 @@ public class UpdateTaskRequest implements Request {
     public void validate() throws InputValidationException {
         try {
             Task.validateId(getId());
+            if (getBoardColumnId() != null)
+                BoardColumn.validateId(getBoardColumnId());
             if (getTitle() != null)
                 Task.validateTitle(getTitle());
+            if (getPosition() != null)
+                Task.validatePosition(getPosition());
             if (getPriority() != null)
                 Task.validatePriority(getPriority());
             if (getColor() != null)
@@ -44,12 +53,30 @@ public class UpdateTaskRequest implements Request {
         return this;
     }
 
+    public String getBoardColumnId() {
+        return boardColumnId;
+    }
+
+    public UpdateTaskRequest setBoardColumnId(String boardColumnId) {
+        this.boardColumnId = boardColumnId;
+        return this;
+    }
+
     public String getTitle() {
         return title;
     }
 
     public UpdateTaskRequest setTitle(String title) {
         this.title = title;
+        return this;
+    }
+
+    public Integer getPosition() {
+        return position;
+    }
+
+    public UpdateTaskRequest setPosition(Integer position) {
+        this.position = position;
         return this;
     }
 

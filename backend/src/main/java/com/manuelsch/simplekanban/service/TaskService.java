@@ -8,5 +8,5 @@ public interface TaskService {
 
     Task createTask(String boardColumnId, String title) throws RecordNotFoundException;
 
-    Task updateTask(String id, String title, Priority priority, String color, String description) throws RecordNotFoundException;
+    Task updateTask(String id, String boardColumn, String title, Integer position, Priority priority, String color, String description) throws RecordNotFoundException;
 }

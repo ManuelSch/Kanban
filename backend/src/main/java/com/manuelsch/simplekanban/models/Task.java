@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * A Kanban task/item
@@ -19,6 +20,9 @@ public class Task {
 
     @Column
     private String title;
+
+    @Column
+    private Integer position;
 
     @Column
     private Priority priority;
@@ -70,6 +74,22 @@ public class Task {
     }
 
     /**
+     * Checks if the given value is a valid Task position
+     *
+     * @param val
+     * @throws PropertyValidationException
+     */
+    public static void validatePosition(Object val) throws PropertyValidationException {
+        if (val == null)
+            throw new PropertyValidationException("No position given");
+        if (!(val instanceof Integer))
+            throw new PropertyValidationException("Position must be an integer");
+        Integer position = (Integer) val;
+        if (position < 0)
+            throw new PropertyValidationException("Position must not be negative");
+    }
+
+    /**
      * Checks if the given value is a valid Task priority
      *
      * @param val
@@ -117,6 +137,31 @@ public class Task {
             throw new PropertyValidationException("Description must be shorter than 1024 characters");
     }
 
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", position=" + position +
+                ", priority=" + priority +
+                ", color='" + color + '\'' +
+                ", description='" + description + '\'' +
+                ", boardColumn=" + boardColumn +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return Objects.equals(id, task.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
     public String getId() {
         return id;
@@ -133,6 +178,15 @@ public class Task {
 
     public Task setTitle(String title) {
         this.title = title;
+        return this;
+    }
+
+    public Integer getPosition() {
+        return position;
+    }
+
+    public Task setPosition(Integer position) {
+        this.position = position;
         return this;
     }
 

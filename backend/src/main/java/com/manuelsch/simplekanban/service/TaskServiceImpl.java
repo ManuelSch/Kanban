@@ -9,6 +9,8 @@ import com.manuelsch.simplekanban.repositories.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 public class TaskServiceImpl implements TaskService {
 
@@ -22,34 +24,46 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    @Transactional
     public Task createTask(String boardColumnId, String title) throws RecordNotFoundException {
         BoardColumn boardColumn = boardColumnRepository.findById(boardColumnId)
                 .orElseThrow(() -> new RecordNotFoundException("No boardColumn with the given ID could be found."));
 
         Task newTask = new Task()
                 .setTitle(title)
+                .setPosition(boardColumn.getTasks().size())
                 .setPriority(Priority.MEDIUM)
                 .setDescription("");
 
         Task createdTask = taskRepository.save(newTask);
 
         boardColumn.getTasks().add(createdTask);
-        BoardColumn updatedBoardColumn = boardColumnRepository.save(boardColumn);
-
-//        newTask.setId(updatedBoardColumn.getTaskById(createdTask.getId()).)
-//        newTask.setId(updatedBoardColumn.getTaskById(createdTask.getId()).)
-        createdTask.setBoardColumn(updatedBoardColumn);
+        createdTask.setBoardColumn(boardColumn);
 
         return taskRepository.save(createdTask);
     }
 
     @Override
-    public Task updateTask(String id, String title, Priority priority, String color, String description) throws RecordNotFoundException {
+    @Transactional
+    public Task updateTask(String id, String boardColumnId, String title, Integer position, Priority priority, String color, String description) throws RecordNotFoundException {
         Task existingTask = taskRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("No task with the given ID could be found."));
 
         if (title != null)
             existingTask.setTitle(title);
+
+        if (boardColumnId != null) {
+            BoardColumn oldBoardColumn = existingTask.getBoardColumn();
+            oldBoardColumn.getTasks().remove(existingTask);
+            boardColumnRepository.save(oldBoardColumn);
+            BoardColumn newBoardColumn = boardColumnRepository.findById(boardColumnId)
+                    .orElseThrow(() -> new RecordNotFoundException("No boardColumn with the given ID could be found."));
+            newBoardColumn.getTasks().add(existingTask);
+            existingTask.setBoardColumn(newBoardColumn);
+        }
+
+        if (position != null)
+            existingTask.setPosition(position);
 
         if (priority != null)
             existingTask.setPriority(priority);

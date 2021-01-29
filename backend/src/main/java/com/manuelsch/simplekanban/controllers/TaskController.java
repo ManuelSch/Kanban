@@ -41,7 +41,9 @@ public class TaskController {
         updatedTaskData.validate();
         Task updatedTask = taskService.updateTask(
                 updatedTaskData.getId(),
+                updatedTaskData.getBoardColumnId(),
                 updatedTaskData.getTitle(),
+                updatedTaskData.getPosition(),
                 updatedTaskData.getPriority(),
                 updatedTaskData.getColor(),
                 updatedTaskData.getDescription()

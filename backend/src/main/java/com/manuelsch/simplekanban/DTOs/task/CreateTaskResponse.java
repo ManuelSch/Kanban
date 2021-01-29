@@ -10,6 +10,8 @@ public class CreateTaskResponse implements Response {
 
     private String title;
 
+    private Integer position;
+
     private Priority priority;
 
     private String color;
@@ -19,6 +21,7 @@ public class CreateTaskResponse implements Response {
     public CreateTaskResponse(Task task) {
         this.id = task.getId();
         this.title = task.getTitle();
+        this.position = task.getPosition();
         this.priority = task.getPriority();
         this.color = task.getColor();
         this.description = task.getDescription();
@@ -39,6 +42,15 @@ public class CreateTaskResponse implements Response {
 
     public CreateTaskResponse setTitle(String title) {
         this.title = title;
+        return this;
+    }
+
+    public Integer getPosition() {
+        return position;
+    }
+
+    public CreateTaskResponse setPosition(Integer position) {
+        this.position = position;
         return this;
     }
 
