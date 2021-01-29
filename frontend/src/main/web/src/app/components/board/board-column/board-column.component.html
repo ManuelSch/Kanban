@@ -1,11 +1,19 @@
 <mat-card class="_board-column">
-  <mat-card-title class="_column-title _clickable" (click)="editColumnTitle()">
+  <mat-card-title (click)="editColumnTitle()" class="_column-title _clickable">
     {{ column?.title }}
   </mat-card-title>
-  <mat-card-content class="_tasks">
-    <app-task *ngFor="let task of column?.tasks" [task]="task"></app-task>
-    <button mat-button color="primary" (click)="createNewTask()">
-      <mat-icon>add</mat-icon>
-      New Task</button>
+  <mat-card-content
+    (cdkDropListDropped)="drop($event, column?.id)"
+    [cdkDropListData]="sortedTasks()"
+    cdkDropList
+    class="_tasks"
+  >
+    <app-task *ngFor="let task of sortedTasks()" [cdkDragData]="task" [task]="task" cdkDrag></app-task>
   </mat-card-content>
+  <mat-card-footer>
+    <button (click)="createNewTask()" class="_add-task-btn" color="primary" mat-button>
+      <mat-icon>add</mat-icon>
+      New Task
+    </button>
+  </mat-card-footer>
 </mat-card>

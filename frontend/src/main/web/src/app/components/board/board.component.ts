@@ -4,7 +4,6 @@ import { BoardService } from '../../services/board.service';
 import { Board } from '../../models/Board';
 import { BoardColumnService } from '../../services/board-column.service';
 import { MatRipple } from '@angular/material/core';
-import { BoardColumn } from '../../models/BoardColumn';
 
 @Component({
   selector: 'app-board',

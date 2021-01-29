@@ -2,11 +2,12 @@
   <div>
     <h2 matRipple #boardTitle class="_board-title _clickable" (click)="editBoardTitle()">{{ board?.title }}</h2>
   </div>
-  <div class="_columns">
+  <div cdkDropListGroup class="_columns">
     <app-board-column *ngFor="let column of sortedColumns" [column]="column"></app-board-column>
     <button mat-button color="primary" (click)="createNewColumn()">
       <mat-icon>add</mat-icon>
-      New Column</button>
+      New Column
+    </button>
   </div>
 <!--  <pre>{{ board | json }}</pre>-->
 </div>

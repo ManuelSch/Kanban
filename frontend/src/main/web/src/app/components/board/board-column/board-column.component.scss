@@ -1,20 +1,29 @@
-//._board-column {
-//  padding: 1rem;
-//  background: rgba(0,0,0,0.1);
-//  border-radius: 0.25rem;
-//
-//  ._column-title {
-//    font-weight: 500;
-//    margin-bottom: 2rem;
-//  }
-//
-//  ._tasks {
-//    ._task {
-//
-//    }
-//
-//    ._task + ._task {
-//      margin-top: 1rem;
-//    }
-//  }
-//}
+:host {
+  height: 100%;
+}
+
+._board-column {
+  display: flex;
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.05);
+
+  ._column-title {
+    font-weight: 500;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  ._tasks {
+    flex-grow: 1;
+    margin-bottom: 0.5rem;
+
+    > * + * {
+      margin-top: 0.5rem;
+    }
+  }
+
+  ._add-task-btn {
+    width: 100%;
+    margin: 0;
+  }
+}

@@ -15,6 +15,7 @@ import { BoardColumnComponent } from './components/board/board-column/board-colu
 import { MatCardModule } from '@angular/material/card';
 import { TaskComponent } from './components/board/board-column/task/task.component';
 import { MatRippleModule } from '@angular/material/core';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -24,16 +25,17 @@ import { MatRippleModule } from '@angular/material/core';
     BoardColumnComponent,
     TaskComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        HttpClientModule,
-        MatIconModule,
-        MatButtonModule,
-        MatCardModule,
-        MatRippleModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule,
+    MatRippleModule,
+    DragDropModule,
+  ],
   providers: [
     ApiService,
     BoardService,

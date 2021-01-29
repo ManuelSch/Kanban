@@ -11,6 +11,7 @@
     </div>
   </mat-card-title>
   <mat-card-content (click)="editTaskDescription()" class="_task-description _clickable" title="Change description">
-    {{ task?.description }}
+    <span *ngIf="!task?.description" class="_muted">🖋</span>
+    <span *ngIf="task?.description">{{ task?.description }}</span>
   </mat-card-content>
 </mat-card>

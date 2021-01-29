@@ -1,9 +1,10 @@
 import { Priority } from './Priority';
 
 export class Task {
-    id?: string;
-    title: string;
-    color?: string;
-    priority?: Priority;
+  id?: string;
+  title: string;
+  position: number;
+  color?: string;
+  priority?: Priority;
   description?: string;
 }

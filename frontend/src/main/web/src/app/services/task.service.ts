@@ -19,7 +19,10 @@ export class TaskService {
     return this.apiService.post('/task', body);
   }
 
-  public async updateTask(id: string, data: { title?: string, color?: string, priority?: Priority, description?: string }): Promise<Task> {
+  public async updateTask(
+    id: string,
+    data: { boardColumnId?: string, title?: string, position?: number, color?: string, priority?: Priority, description?: string },
+  ): Promise<Task> {
     const body = {
       id,
       ...data,
